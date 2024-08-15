@@ -11,7 +11,7 @@ export default function TodoList() {
       <p>Resultados: {todos.length}</p>
       <div className="todolist">
         {todos.map((task) => (
-          <TodoItem task={task} key={task.id} />
+          <TodoItem task={task} key={task.title} />
         ))}
       </div>
     </div>
