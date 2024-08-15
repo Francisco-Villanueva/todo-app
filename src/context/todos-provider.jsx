@@ -4,31 +4,17 @@ export const TodosContext = React.createContext(); // Creacion del contexto
 
 export default function TodosProvider({ children }) {
   // Creacion del proveedor del contexto
-  const [initialState, setInitialState] = useState([]);
+  const storedTodos = JSON.parse(localStorage.getItem("tareas") || "[]");
+  const [inmmutableState, setInmmutableState] = useState(storedTodos);
   const [users, setUsers] = useState([]);
-  const [todos, setTodos] = useState(initialState); // este listado es el que vamos a mostrar en nuestra apliacion.
+  const [todos, setTodos] = useState(storedTodos); // este listado es el que vamos a mostrar en nuestra apliacion.
 
   useEffect(() => {
-    // efecto para hacer una carga inicial a nuestro proyecto.
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((response) => response.json())
-      .then((data) => {
-        const todos = data.slice(0, 50); // en todos tenemos las 10 tareas que vienen desde la API.
-
-        setInitialState(todos);
-        setTodos(todos);
-      });
-  }, []);
-  useEffect(() => {
-    // efecto para hacer una carga inicial a nuestro proyecto.
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((data) => {
-        // en todos tenemos las 10 tareas que vienen desde la API.
-
-        setUsers(data);
-      });
-  }, []);
+    // Actaulizo localStorage cada vez que hay un cambio sobre nuestro estado todos.
+    if (todos.length > 0) {
+      localStorage.setItem("tareas", JSON.stringify(inmmutableState));
+    }
+  }, [inmmutableState]);
 
   const addTodo = (newTodo) => {
     //esta funcion sirve para agregar UNA SOLA tarea a nuestra lista!
@@ -43,6 +29,7 @@ export default function TodosProvider({ children }) {
 
       return;
     }
+    setInmmutableState((prevState) => [...prevState, newTodo]);
     setTodos((prevState) => [...prevState, newTodo]);
   };
 
@@ -53,12 +40,12 @@ export default function TodosProvider({ children }) {
   const handleFilter = (filter) => {
     //esta funcion sirve para filtrar el listado de tareas!
     if (filter === "todas") {
-      setTodos(initialState);
+      setTodos(inmmutableState);
     } else {
       if (filter === "done") {
-        setTodos(initialState.filter((tarea) => tarea.completed));
+        setTodos(inmmutableState.filter((tarea) => tarea.completed));
       } else {
-        setTodos(initialState.filter((tarea) => !tarea.completed));
+        setTodos(inmmutableState.filter((tarea) => !tarea.completed));
       }
     }
   };

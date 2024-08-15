@@ -7,6 +7,7 @@ export default function AddTodo() {
   const [newTask, setNewTask] = useState({
     title: "",
     completed: false,
+    date: new Date(),
   });
 
   const handleInputChange = (e) => {
@@ -23,6 +24,7 @@ export default function AddTodo() {
       setNewTask({
         title: "",
         completed: false,
+        date: new Date(),
       });
     }
   };
