@@ -9,11 +9,16 @@ export default function TodoItem({ task }) {
 
   return (
     <div
-      className={`bg-bg-background   p-2 px-4 rounded-xl space-y-1 transition-all duration-300 ${
+      className={`bg-bg-background   p-2 px-4 rounded-xl space-y-4 transition-all duration-300 ${
         task.completed ? " line-through opacity-30" : ""
       } `}
     >
-      <p className="font-semibold">{task.title}</p>
+      <div className="flex items-center justify-between">
+        <p className="font-semibold  w-2/3 max-w-2/3 truncate">{task.title}</p>
+        <span className="text-sm text-primary p-1 px-4 rounded-md bg-gray-100 w-1/3 overflow-hidden text-ellipsis whitespace-nowrap">
+          {task.owner || "Not assigned"}
+        </span>
+      </div>
       <p className="font-light text-sm">{task.description}</p>
 
       <section className="flex items-center justify-between">

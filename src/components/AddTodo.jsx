@@ -1,18 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { TodosContext } from "../context/todos-provider";
 import Button from "../common/Button";
 import { motion, AnimatePresence } from "framer-motion";
+import { UserService } from "../services/user.service";
 
 export default function AddTodo() {
   const { addTodo } = useContext(TodosContext);
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [users, setUsers] = useState([]);
 
   const [newTask, setNewTask] = useState({
     title: "",
     description: "",
+    owner: "",
     completed: false,
     date: new Date(),
   });
+
+  useEffect(() => {
+    // Si tuviesemos un litado de usuarios en un DB,
+    //en este punto hacemos la call a la api para pedir ese listado de usuarios
+    UserService.getUsers().then((res) => {
+      setUsers(res);
+    });
+  }, []);
 
   const handleInputChange = (e) => {
     setNewTask((prevState) => ({
@@ -24,11 +35,16 @@ export default function AddTodo() {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      if (newTask.description !== "" && newTask.title !== "") {
+      if (
+        newTask.description !== "" &&
+        newTask.title !== "" &&
+        newTask.owner !== ""
+      ) {
         addTodo(newTask);
         setNewTask({
           title: "",
           description: "",
+          owner: "",
           completed: false,
           date: new Date(),
         });
@@ -78,15 +94,33 @@ export default function AddTodo() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             />
-            <motion.div
+            <motion.select
+              onChange={handleInputChange}
+              name="owner"
+              className="p-4 m-0 text-[12px]"
+              value={newTask.owner}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
+              <option value="">Seleccionar responsable</option>
+              {users.map((user) => (
+                <option key={user.id} value={user.name}>
+                  {user.name}
+                </option>
+              ))}
+            </motion.select>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
               <Button
                 type="submit"
                 disabled={
-                  newTask.title.length === 0 || newTask.description.length === 0
+                  newTask.title.length === 0 ||
+                  newTask.description.length === 0 ||
+                  newTask.owner.length === 0
                 }
                 className={"font-light"}
               >
