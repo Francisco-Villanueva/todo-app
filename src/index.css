@@ -4,6 +4,10 @@
  * if a system-wide theme preference is set on the user's device.
  */
 
+ @import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
  :root {
   --background-body: #fff;
   --background: #efefef;
@@ -158,38 +162,8 @@ body {
   }
 }
 
-button {
-  transition:
-    background-color 0.1s linear,
-    border-color 0.1s linear,
-    color 0.1s linear,
-    box-shadow 0.1s linear,
-    transform 0.1s ease;
-  transition:
-    background-color var(--animation-duration) linear,
-    border-color var(--animation-duration) linear,
-    color var(--animation-duration) linear,
-    box-shadow var(--animation-duration) linear,
-    transform var(--animation-duration) ease;
-}
 
-@media (prefers-color-scheme: dark) {
 
-  button {
-  transition:
-    background-color 0.1s linear,
-    border-color 0.1s linear,
-    color 0.1s linear,
-    box-shadow 0.1s linear,
-    transform 0.1s ease;
-  transition:
-    background-color var(--animation-duration) linear,
-    border-color var(--animation-duration) linear,
-    color var(--animation-duration) linear,
-    box-shadow var(--animation-duration) linear,
-    transform var(--animation-duration) ease;
-  }
-}
 
 input {
   transition:
@@ -513,36 +487,8 @@ input {
   }
 }
 
-button {
-  color: #1d1d1d;
-  color: var(--form-text);
-  background-color: #efefef;
-  background-color: var(--background);
-  font-family: inherit;
-  font-size: inherit;
-  margin-right: 6px;
-  margin-bottom: 6px;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  outline: none;
-}
 
-@media (prefers-color-scheme: dark) {
 
-  button {
-  background-color: #161f27;
-  background-color: var(--background);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-
-  button {
-  color: #fff;
-  color: var(--form-text);
-  }
-}
 
 textarea {
   color: #1d1d1d;
@@ -606,20 +552,8 @@ select {
   }
 }
 
-button {
-  background-color: #d0cfcf;
-  background-color: var(--button-base);
-  padding-right: 30px;
-  padding-left: 30px;
-}
 
-@media (prefers-color-scheme: dark) {
 
-  button {
-  background-color: #0c151c;
-  background-color: var(--button-base);
-  }
-}
 
 input[type='submit'] {
   background-color: #d0cfcf;

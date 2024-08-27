@@ -5,15 +5,14 @@ export const TodosContext = React.createContext(); // Creacion del contexto
 export default function TodosProvider({ children }) {
   // Creacion del proveedor del contexto
   const storedTodos = JSON.parse(localStorage.getItem("tareas") || "[]");
+
   const [inmmutableState, setInmmutableState] = useState(storedTodos);
-  const [users, setUsers] = useState([]);
   const [todos, setTodos] = useState(storedTodos); // este listado es el que vamos a mostrar en nuestra apliacion.
 
   useEffect(() => {
     // Actaulizo localStorage cada vez que hay un cambio sobre nuestro estado todos.
-    if (todos.length > 0) {
-      localStorage.setItem("tareas", JSON.stringify(inmmutableState));
-    }
+
+    localStorage.setItem("tareas", JSON.stringify(inmmutableState));
   }, [inmmutableState]);
 
   const addTodo = (newTodo) => {
@@ -24,17 +23,12 @@ export default function TodosProvider({ children }) {
       (element) => element.title === newTodo.title
     );
     if (existeTarea) {
-      alert(`La terea ${newTodo.title} ya existe!`);
       //cortar la ejecucion cuando pasa est error
-
-      return;
+      throw new Error(`La terea ${newTodo.title} ya existe!`);
     }
+
     setInmmutableState((prevState) => [...prevState, newTodo]);
     setTodos((prevState) => [...prevState, newTodo]);
-  };
-
-  const getUserInfo = (id) => {
-    return users.find((user) => user.id === id);
   };
 
   const handleFilter = (filter) => {
@@ -57,9 +51,25 @@ export default function TodosProvider({ children }) {
     setTodos(() => [...todos]);
   };
 
+  const deleteTodo = (title) => {
+    //esta funcion sirve para eliminar UNA tarea de nuestra lista
+    const updatedTodos = inmmutableState.filter(
+      (tarea) => tarea.title !== title
+    );
+    setInmmutableState(updatedTodos);
+    setTodos(updatedTodos);
+  };
+
   return (
     <TodosContext.Provider
-      value={{ todos, addTodo, handleFilter, handleTask, users, getUserInfo }}
+      value={{
+        todos,
+        inmmutableState,
+        addTodo,
+        handleFilter,
+        handleTask,
+        deleteTodo,
+      }}
     >
       {children}
     </TodosContext.Provider>
