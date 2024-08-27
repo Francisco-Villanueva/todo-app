@@ -5,7 +5,7 @@ import FilterTodos from "./components/FilterTodos";
 import Loader from "./common/Loader";
 function App() {
   return (
-    <main className="">
+    <main className=" text-text">
       <AddTodo />
 
       <FilterTodos />

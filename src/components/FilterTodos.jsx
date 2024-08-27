@@ -6,7 +6,7 @@ export default function FilterTodos() {
   const { handleFilter, todos, inmmutableState } = useContext(TodosContext);
   return inmmutableState.length > 0 ? (
     <div className="flex items-center justify-between  py-2">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 text-black">
         <p> Filtros </p>
         <div className="size-6  text-xs bg-gray-200 border grid place-items-center rounded-full">
           <span> {todos.length} </span>

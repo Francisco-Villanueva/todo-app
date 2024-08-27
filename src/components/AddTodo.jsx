@@ -42,7 +42,7 @@ export default function AddTodo() {
   return (
     <div className="mb-4">
       <Button
-        variant={"outline"}
+        variant={"secondary"}
         onClick={() => setIsFormVisible(!isFormVisible)}
       >
         {isFormVisible ? "Cerrar formulario" : "Agregar nueva tarea"}

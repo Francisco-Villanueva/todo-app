@@ -7,9 +7,10 @@ export default {
   theme: {
     extend: {
       colors:{
-        primary: "#884cb1",
+        primary: "#52555d",
+        text: "#c2b9bf",
         bg:{
-          background:"#d4ceea"
+          background:"#000018"
         }
       },
       keyframes:{
