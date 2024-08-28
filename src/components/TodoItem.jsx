@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
-import { TodosContext } from "../context/todos-provider";
+import React from "react";
+
 import Button from "../common/Button";
 import { formateTime } from "../utilities/format-date";
 import { FaTrash } from "react-icons/fa";
 
-export default function TodoItem({ task }) {
-  const { handleTask, deleteTodo } = useContext(TodosContext);
-
+export default function TodoItem({ task, handleTask, deleteTodo }) {
   return (
     <div
       className={`bg-bg-background   p-2 px-4 rounded-xl space-y-4 transition-all duration-300 ${

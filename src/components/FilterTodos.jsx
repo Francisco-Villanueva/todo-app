@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { TodosContext } from "../context/todos-provider";
 
-export default function FilterTodos() {
+export default function FilterTodos({ handleFilter, todos, inmmutableState }) {
   // Este componente ejecuta filtros sobre el listado de tareas.
-  const { handleFilter, todos, inmmutableState } = useContext(TodosContext);
+
   return inmmutableState.length > 0 ? (
     <div className="flex items-center justify-between  py-2">
       <div className="flex items-center gap-2 text-black">

@@ -3,8 +3,7 @@ import TodoItem from "./TodoItem";
 import { TodosContext } from "../context/todos-provider";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function TodoList() {
-  const { todos } = useContext(TodosContext);
+export default function TodoList({ todos, deleteTodo, handleTask }) {
   const [animatedTodos, setAnimatedTodos] = useState(todos);
 
   useEffect(() => {
@@ -25,7 +24,11 @@ export default function TodoList() {
                   exit={{ opacity: 0, y: -50 }}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 >
-                  <TodoItem task={task} />
+                  <TodoItem
+                    task={task}
+                    deleteTodo={deleteTodo}
+                    handleTask={handleTask}
+                  />
                 </motion.div>
               ))}
             </AnimatePresence>

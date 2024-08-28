@@ -1,11 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
-import { TodosContext } from "../context/todos-provider";
+import React, { useState, useEffect } from "react";
 import Button from "../common/Button";
 import { motion, AnimatePresence } from "framer-motion";
 import { UserService } from "../services/user.service";
 
-export default function AddTodo() {
-  const { addTodo } = useContext(TodosContext);
+export default function AddTodo({ addTodo }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [users, setUsers] = useState([]);
 
