@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
-import { TodosContext } from "../context/todos-provider";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { handleTask, deleteTodo } from "../redux/todoSlice";
 import Button from "../common/Button";
 import { formateTime } from "../utilities/format-date";
 import { FaTrash } from "react-icons/fa";
 
 export default function TodoItem({ task }) {
-  const { handleTask, deleteTodo } = useContext(TodosContext);
+  const dispatch = useDispatch();
 
   return (
     <div
@@ -23,12 +24,15 @@ export default function TodoItem({ task }) {
 
       <section className="flex items-center justify-between">
         <div className="flex items-center gap-2 text-xs">
-          <Button variant={"primary"} onClick={() => handleTask(task.title)}>
+          <Button
+            variant={"primary"}
+            onClick={() => dispatch(handleTask(task.title))}
+          >
             <p>Marcar tarea</p>
           </Button>
           <Button
             variant={"destructive"}
-            onClick={() => deleteTodo(task.title)}
+            onClick={() => dispatch(deleteTodo(task.title))}
           >
             <FaTrash />
           </Button>

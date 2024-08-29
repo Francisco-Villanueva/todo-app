@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
-import { TodosContext } from "../context/todos-provider";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function TodoList() {
-  const { todos } = useContext(TodosContext);
+  const todos = useSelector((state) => state.todo.todos);
   const [animatedTodos, setAnimatedTodos] = useState(todos);
 
   useEffect(() => {
