@@ -1,9 +1,12 @@
 import React from "react";
+
 import { useDispatch } from "react-redux";
 import { handleTask, deleteTodo } from "../redux/todoSlice";
+
 import Button from "../common/Button";
 import { formateTime } from "../utilities/format-date";
 import { FaTrash } from "react-icons/fa";
+
 
 export default function TodoItem({ task }) {
   const dispatch = useDispatch();
