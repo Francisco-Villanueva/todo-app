@@ -1,8 +1,14 @@
-import React, { useContext } from "react";
-import { TodosContext } from "../context/todos-provider";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { handleFilter } from "../redux/todoSlice";
 
 export default function FilterTodos({ handleFilter, todos, inmmutableState }) {
   // Este componente ejecuta filtros sobre el listado de tareas.
+
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todo.todos);
+  const inmmutableState = useSelector((state) => state.todo.inmmutableState);
+
 
   return inmmutableState.length > 0 ? (
     <div className="flex items-center justify-between  py-2">
@@ -13,7 +19,7 @@ export default function FilterTodos({ handleFilter, todos, inmmutableState }) {
         </div>
       </div>
       <select
-        onChange={(e) => handleFilter(e.target.value)}
+        onChange={(e) => dispatch(handleFilter(e.target.value))}
         className="text-sm m-0 p-1 px-3 pr-8"
       >
         <option value="todas">todas</option>
