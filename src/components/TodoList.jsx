@@ -26,11 +26,7 @@ export default function TodoList() {
                   exit={{ opacity: 0, y: -50 }}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 >
-                  <TodoItem
-                    task={task}
-                    deleteTodo={deleteTodo}
-                    handleTask={handleTask}
-                  />
+                  <TodoItem task={task} />
                 </motion.div>
               ))}
             </AnimatePresence>
