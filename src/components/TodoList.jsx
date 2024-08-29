@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
 import { motion, AnimatePresence } from "framer-motion";
 
-
 export default function TodoList() {
   const todos = useSelector((state) => state.todo.todos);
 

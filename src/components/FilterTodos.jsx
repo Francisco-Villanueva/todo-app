@@ -2,13 +2,12 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { handleFilter } from "../redux/todoSlice";
 
-export default function FilterTodos({ handleFilter, todos, inmmutableState }) {
+export default function FilterTodos() {
   // Este componente ejecuta filtros sobre el listado de tareas.
 
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todo.todos);
   const inmmutableState = useSelector((state) => state.todo.inmmutableState);
-
 
   return inmmutableState.length > 0 ? (
     <div className="flex items-center justify-between  py-2">
